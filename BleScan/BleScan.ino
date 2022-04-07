@@ -45,12 +45,13 @@ void loop() {
      BLEAdvertisedDevice device = foundDevices.getDevice(i);
      int rssi = device.getRSSI();
      if (rssi > bestDev) {
-       best = rssi;
-       BLEAdvertisedDevice bestDevice=results.getDevice(i);
+       bestDev = rssi;
+       BLEAdvertisedDevice bestDevice=foundDevices.getDevice(i);
     }
   }
+ 
   Serial.println("Nearby best device :");
-  Serial.println(bestDevice.getName());
+//  Serial.println(String(bestDevice.getName()));
 
   if (bestDevice.getRSSI()>RSSI_CUTOFF)
   {
