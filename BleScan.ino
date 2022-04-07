@@ -8,7 +8,7 @@ int RSSI_CUTOFF=-60;
 
 int scanTime = 5; //In seconds
 BLEScan* pBLEScan;
-char name[] =""'
+char name[] ="";
 
 class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
@@ -37,26 +37,28 @@ void loop() {
 
 
   int bestDev=RSSI_CUTOFF;
-  BLEAdvertisedDevice bestDevice=results.getDevice(1);
+  BLEAdvertisedDevice bestDevice=foundDevices.getDevice(1);
 
 
   for (int i = 0; i <foundDevices.getCount(); i++)
   {
-     BLEAdvertisedDevice device = results.getDevice(i);
+     BLEAdvertisedDevice device = foundDevices.getDevice(i);
      int rssi = device.getRSSI();
      if (rssi > bestDev) {
        best = rssi;
        BLEAdvertisedDevice bestDevice=results.getDevice(i);
     }
   }
-  Serial.println("Nearby device :");
+  Serial.println("Nearby best device :");
   Serial.println(bestDevice.getName());
 
   if (bestDevice.getRSSI()>RSSI_CUTOFF)
   {
       digitalWrite(ledPin,HIGH);
+      Serial.println("device found ");
   }else{
       digitalWrite(ledPin,LOW);
+      Serial.println("No device found");
   }
   
 
