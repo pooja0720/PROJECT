@@ -8,6 +8,7 @@ int RSSI_CUTOFF=-60;
 
 int scanTime = 5; //In seconds
 BLEScan* pBLEScan;
+char name[] =""'
 
 class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
@@ -20,7 +21,7 @@ void setup() {
   pinMode(ledPin,OUTPUT);
   Serial.println("Scanning...");
 
-  BLEDevice::init("");
+  BLEDevice::init(name);
   pBLEScan = BLEDevice::getScan(); 
   pBLEScan->setAdvertisedDeviceCallbacks(new MyAdvertisedDeviceCallbacks());
   pBLEScan->setActiveScan(true); 
